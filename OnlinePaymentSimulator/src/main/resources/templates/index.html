@@ -8,8 +8,39 @@
     <body>
         <div id="wrapper">
             <header></header>
-            <section></section>
-            <footer><div id="copyrights">&copy; ${Main.BANK_NAME}</div></footer>
+            <section>
+                <div id="login-step-1">
+                    <form method="post" action="/login">
+                        <div class="form-field">
+                            <label>
+                                <span class="form-field-label-text">
+                                    Käyttäjätunnus
+                                </span>
+                                <input type="text" pattern="[0-9]{8}" class="form-field-input" name="username" title="Kahdeksan (8) merkkiä pitkä käyttäjätunnus, joka sisältää ainoastaan numeroita." required>
+                            </label>
+                        </div>
+                        <div class="form-field">
+                            <label>
+                                <span class="form-field-label-text">
+                                    Salasana
+                                </span>
+                                <input type="password" pattern="[0-9]{4}" class="form-field-input" name="password" title="Neljä (8) merkkiä pitkä salasana, joka sisältää ainoastaan numeroita." required>
+                            </label>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="form-action">Kirjaudu</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div id="step-indicator" class="indicator">
+                    <div class="indicator-step current-step"></div>
+                    <div class="indicator-step"></div>
+                    <div class="indicator-step"></div>
+                </div>
+            </section>
+            <footer><div id="copyrights">&copy; <span class="copyright-holder" th:text="${BANK_NAME}"></span></div></footer>
         </div>
     </body>
 </html>

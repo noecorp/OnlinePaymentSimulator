@@ -12,7 +12,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         Spark.get("/", (req, res) -> {
             HashMap map = new HashMap<>();
-            map.put("Main.BANK_NAME", Main.BANK_NAME);
+            map.put("BANK_NAME", Main.BANK_NAME);
 
             return new ModelAndView(map, "index");
         }, new ThymeleafTemplateEngine());
