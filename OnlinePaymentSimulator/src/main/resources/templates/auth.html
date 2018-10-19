@@ -9,36 +9,41 @@
         <div id="wrapper">
             <header></header>
             <section>
-                <div id="login-step-1">
-                    <p>Sinun tulee määrittää ennen maksua vaaditut tiedot query parametreina (to, toIBAN, amount, currency & (valinnainen) ref). Voit myös valita valmiin demomaksun.<br />
-                        <a href="/demo-payments">Valitse demo maksu</a></p>
-                    <form method="post" action="/login">
+                <div id="confirm-step-1">
+                    <div id="banks-code">
+                        <p>Pankin koodi: <span th:text="${bank_pin}"></span></p>
+                    </div>
+                    <form method="post" action="/confirmed">
+                        <input type="hidden" name="bankPIN" th:value="${bank_pin}" />
                         <div class="form-field">
                             <label>
                                 <span class="form-field-label-text">
-                                    Käyttäjätunnus
+                                    Valitse tili
                                 </span>
-                                <input type="text" pattern="[0-9]{8}" class="form-field-input" name="user" title="Kahdeksan (8) merkkiä pitkä käyttäjätunnus, joka sisältää ainoastaan numeroita." required>
+                                <select class="form-field-input" name="selectedAccount" required>
+                                    <option th:each="account : ${accounts}" th:selected="${account.id == acc}" th:value="${account.id}" th:text="${account}"></option>
+                                </select>
                             </label>
                         </div>
+                        
                         <div class="form-field">
                             <label>
                                 <span class="form-field-label-text">
-                                    Salasana
+                                    Pankin koodia vastaava tunnusluku
                                 </span>
-                                <input type="password" pattern="[0-9]{4}" class="form-field-input" name="password" title="Neljä (8) merkkiä pitkä salasana, joka sisältää ainoastaan numeroita." required>
+                                <input type="text" pattern="[0-9]{4}" class="form-field-input" name="code" title="Neljä (4) merkkiä pitkä tunnusluku, joka sisältää ainoastaan numeroita." required>
                             </label>
                         </div>
                         
                         <div class="form-actions">
-                            <button type="submit" class="form-action">Kirjaudu</button>
+                            <button type="submit" class="form-action">Jatka</button>
                         </div>
                     </form>
                 </div>
                 
                 <div id="step-indicator" class="indicator">
-                    <div class="indicator-step current-step"></div>
                     <div class="indicator-step"></div>
+                    <div class="indicator-step current-step"></div>
                     <div class="indicator-step"></div>
                 </div>
             </section>

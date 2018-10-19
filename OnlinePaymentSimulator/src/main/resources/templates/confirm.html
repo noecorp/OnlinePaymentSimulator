@@ -9,42 +9,73 @@
         <div id="wrapper">
             <header></header>
             <section>
-                <div id="confirm-step-1">
-                    <div id="banks-code">
-                        <p>Pankin koodi: <span th:text="{banks-code}"></span></p>
-                    </div>
-                    <form method="post" action="/confirm">
+                <div id="summary-view">
+                    <form method="post" action="/submitted">
                         
                         <div class="form-field">
                             <label>
                                 <span class="form-field-label-text">
-                                    Valitse tili
+                                    Tili
                                 </span>
-                                <select class="form-field-input" name="code" required>
-                                    <option th:each="account ${accounts}" th:value="${account.id}" th:text="${account}"></option>
-                                </select>
+                                <span class="fake-input" th:text="${account}"></span>
                             </label>
                         </div>
                         
                         <div class="form-field">
                             <label>
                                 <span class="form-field-label-text">
-                                    Pankin koodia vastaava tunnusluku
+                                    Määrä
                                 </span>
-                                <input type="text" pattern="[0-9]{4}" class="form-field-input" name="code" title="Neljä (4) merkkiä pitkä tunnusluku, joka sisältää ainoastaan numeroita." required>
+                                <span class="fake-input" th:text="${amount}"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="form-field">
+                            <label>
+                                <span class="form-field-label-text">
+                                    Saaja
+                                </span>
+                                <span class="fake-input" th:text="${to}"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="form-field">
+                            <label>
+                                <span class="form-field-label-text">
+                                    Eräpäivä
+                                </span>
+                                <span class="fake-input" th:text="${expireDate}"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="form-field">
+                            <label>
+                                <span class="form-field-label-text">
+                                    Maksaja
+                                </span>
+                                <span class="fake-input" th:text="${customer}"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="form-field">
+                            <label>
+                                <span class="form-field-label-text">
+                                    Viesti saajalle (valinnainen)
+                                </span>
+                                <input type="text" name="msgToReceiver" placeholder="Viesti saajalle (valinnainen)" />
                             </label>
                         </div>
                         
                         <div class="form-actions">
-                            <button type="submit" class="form-action">Jatka</button>
+                            <button type="submit" class="form-action">Hyväksy maksu</button>
                         </div>
                     </form>
                 </div>
                 
                 <div id="step-indicator" class="indicator">
                     <div class="indicator-step"></div>
-                    <div class="indicator-step current-step"></div>
                     <div class="indicator-step"></div>
+                    <div class="indicator-step current-step"></div>
                 </div>
             </section>
             <footer><div id="copyrights">&copy; <span class="copyright-holder" th:text="${BANK_NAME}"></span></div></footer>

@@ -1,16 +1,11 @@
 package onlinepaymentsimulator.domain;
 
-import java.security.MessageDigest;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.Random;
-import org.apache.commons.codec.digest.*;
+import java.util.UUID;
 
 public class Token {
     private final String token;
     private final Date expires;
-    
-    private final HashAlgorithm algorithm = HashAlgorithm.SHA512;
 
     public Token(Date expires) {
         this.expires = expires;
@@ -18,18 +13,7 @@ public class Token {
     }
     
     private String createToken() {
-        Random random = new Random();
-        String tokenValue = String.valueOf(random.nextInt(99999) + 11111);
-        
-        if (algorithm == HashAlgorithm.SHA512) {
-            return new String(calculateTokenSHA512(tokenValue));
-        }
-        
-        return null;
-    }
-    
-    private byte[] calculateTokenSHA512(String stringToHash) {
-        return DigestUtils.sha512(stringToHash);
+        return UUID.randomUUID().toString();
     }
 
     public String getToken() {
@@ -44,7 +28,13 @@ public class Token {
         return new Date().before(expires);
     }
     
-    private enum HashAlgorithm {
-        SHA512
+    public long timeLeft(Date date) {
+        long time = expires.getTime() - date.getTime();
+        
+        if(time < 0) {
+            time = 0;
+        }
+        
+        return time;
     }
 }
