@@ -86,7 +86,7 @@ public class UserDao implements Dao<User> {
     }
 
     public User findById(int id) throws SQLException {
-        PreparedStatement stmt = conn.prepareStatement("SELECT id, name, customer_id FROM \"User\" WHERE id = ?");
+        PreparedStatement stmt = conn.prepareStatement("SELECT name, customer_id FROM \"User\" WHERE id = ?");
         stmt.setInt(1, id);
         
         ResultSet result = stmt.executeQuery();
