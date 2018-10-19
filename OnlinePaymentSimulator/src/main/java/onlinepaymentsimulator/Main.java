@@ -202,9 +202,9 @@ public class Main {
 
             UserDao userDao = new UserDao(conn);
             Token token = userDao.login(username, req.queryParams("password"));
-            conn.close();
             
             if (token == null) {
+                conn.close();
                 res.redirect("/");
                 return "";
             }
@@ -212,6 +212,7 @@ public class Main {
             User user = userDao.single(username);
 
             if (user == null) {
+                conn.close();
                 res.redirect("/");
                 return "";
             }
@@ -220,6 +221,7 @@ public class Main {
 
             long timeLeft = token.timeLeft(new Date());
             res.cookie("s", token.getToken(), (int) timeLeft);
+            conn.close();
             res.redirect("/auth");
             return "";
         });
