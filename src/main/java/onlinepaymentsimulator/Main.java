@@ -35,6 +35,10 @@ public class Main {
     private static String[] PAYMENT_INFO_KEYS = new String[]{"to", "toIBAN", "amount", "currency", "ref"};
 
     public static void main(String[] args) throws Exception {
+        if (System.getenv("PORT") != null) {
+            Spark.port(Integer.valueOf(System.getenv("PORT")));
+        }
+        
         // A little simple cache for a token-user mapping and token-account
         Map<Token, User> userTokens = new HashMap<>();
         Map<String, Account> accountCache = new HashMap<>();
