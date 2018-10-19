@@ -28,7 +28,6 @@ import spark.Spark;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
 public class Main {
-
     public static String BANK_NAME = "Demo Pankki";
     private static String sessionCookieKey = "s";
     private static String PRE_SELECTED_ACCOUNT_ID_KEY = "preSelAcc";
