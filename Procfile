@@ -1,1 +1,1 @@
-"web:    java -cp target/classes:target/dependency/* OnlinePaymentSimulator.Main" 
+"web:    java -cp target/classes:target/dependency/* onlinepaymentsimulator.Main" 
