@@ -56,14 +56,14 @@ public class UserDao implements Dao<User> {
 
     @Override
     public User single(Integer key) throws SQLException {
-        PreparedStatement stmt = conn.prepareStatement("SELECT id, name, customer_id FROM \"User\" WHERE name = ?");
+        PreparedStatement stmt = conn.prepareStatement("SELECT name, customer_id FROM \"User\" WHERE name = ?");
         stmt.setInt(1, key);
         
         ResultSet result = stmt.executeQuery();
         
         // User found let's create a User object
         if(result.next()) {
-            return new User(result.getInt("id"), result.getInt("name"), new CustomerDao(conn).singlePersonalCustomer(result.getInt("customer_id")));
+            return new User(0, result.getInt("name"), new CustomerDao(conn).singlePersonalCustomer(result.getInt("customer_id")));
         }
         
         return null;
