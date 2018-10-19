@@ -71,7 +71,7 @@ public class UserDao implements Dao<User> {
 
     @Override
     public List<User> all() throws SQLException {
-        PreparedStatement stmt = conn.prepareStatement("SELECT id, name, customer_id FROM \"User\"");
+        PreparedStatement stmt = conn.prepareStatement("SELECT name, customer_id FROM \"User\"");
         
         ResultSet result = stmt.executeQuery();
         
