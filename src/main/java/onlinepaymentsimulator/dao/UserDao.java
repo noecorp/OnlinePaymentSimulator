@@ -28,7 +28,7 @@ public class UserDao implements Dao<User> {
      * @return Success: a token, error: null
      */
     public Token login(Integer username, String password) throws SQLException {
-        PreparedStatement stmt = conn.prepareStatement("SELECT password FROM User WHERE name = ?");
+        PreparedStatement stmt = conn.prepareStatement("SELECT password FROM \"User\" WHERE name = ?");
 
         // Add username to query and execute query
         stmt.setInt(1, username);
@@ -56,7 +56,7 @@ public class UserDao implements Dao<User> {
 
     @Override
     public User single(Integer key) throws SQLException {
-        PreparedStatement stmt = conn.prepareStatement("SELECT id, name, customer_id FROM User WHERE name = ?");
+        PreparedStatement stmt = conn.prepareStatement("SELECT id, name, customer_id FROM \"User\" WHERE name = ?");
         stmt.setInt(1, key);
         
         ResultSet result = stmt.executeQuery();
@@ -71,7 +71,7 @@ public class UserDao implements Dao<User> {
 
     @Override
     public List<User> all() throws SQLException {
-        PreparedStatement stmt = conn.prepareStatement("SELECT id, name, customer_id FROM User User");
+        PreparedStatement stmt = conn.prepareStatement("SELECT id, name, customer_id FROM \"User\"");
         
         ResultSet result = stmt.executeQuery();
         
@@ -86,7 +86,7 @@ public class UserDao implements Dao<User> {
     }
 
     public User findById(int id) throws SQLException {
-        PreparedStatement stmt = conn.prepareStatement("SELECT id, name, customer_id FROM User WHERE id = ?");
+        PreparedStatement stmt = conn.prepareStatement("SELECT id, name, customer_id FROM \"User\" WHERE id = ?");
         stmt.setInt(1, id);
         
         ResultSet result = stmt.executeQuery();
